@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.ac.inhatc.mvc.mapper.SmsMapper">
+	<select id="getName" resultType="String">
+		select id from member
+	</select>
+	<select id="selectSubjectList" resultType="hashmap">
+		SELECT NO, ID, DATE, TYPE, ADDRESS, RESERVATION, TITLE, CONTENTS, BOARD
+		FROM SHARING
+		WHERE 1=1
+	</select>
+	<select id="selectSubjectList2" parameterType="String" resultType="Map">
+			<!-- <if test="value !=null and value !=''">-->
+		SELECT NO, ID, DATE, TYPE, ADDRESS, RESERVATION, TITLE, CONTENTS, BOARD
+		FROM SHARING
+		WHERE type=#{seachKeyword}
+	</select>
+	<select id="selectSubjectOne" parameterType="int" resultType="Map">
+		SELECT
+			NO, ID, DATE, TYPE, ADDRESS, RESERVATION, TITLE, CONTENTS
+			FROM SHARING
+			WHERE NO=#{no}
+	</select>
+	<insert id="registSubject">
+		INSERT INTO SHARING
+		(ID, DATE, TYPE, ADDRESS, RESERVATION, TITLE, CONTENTS, BOARD)
+		VALUES
+		(#{id},#{date},#{type},#{address},#{reservation},#{title},#{contents},2)
+	</insert>
+	
+	<update id="modifyBoardDetail" parameterType="hashMap">
+		UPDATE SHARING
+		SET
+			ID=#{id},
+			TYPE=#{type},
+			ADDRESS=#{address},
+			RESERVATION=#{reservation},
+			TITLE=#{title},
+			CONTENTS=#{contents}
+		WHERE
+			NO=#{no}
+	</update>
+	<delete id="deleteBoardDetail" parameterType="int">
+		DELETE FROM SHARING
+		WHERE NO=#{no}
+	</delete>
+</mapper>

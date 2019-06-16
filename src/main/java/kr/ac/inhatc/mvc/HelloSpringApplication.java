@@ -1,0 +1,14 @@
+package kr.ac.inhatc.mvc;
+
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+@MapperScan(value = {"kr.ac.inhatc.mvc.mapper"}) //패키지명
+public class HelloSpringApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(HelloSpringApplication.class, args);
+	}
+}
